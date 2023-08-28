@@ -2,7 +2,10 @@ function InputGroup({ id, label = '', type = 'text', placeHolder = '', onInputHa
   return (
     <div className="input-group">
       <label htmlFor={id}>{label}</label>
-      <input id={id} type={type} placeholder={placeHolder} onInput={onInputHandler} />
+      <input id={id} type={type}
+        placeholder={placeHolder === '' ? null : placeHolder}
+        onInput={onInputHandler === '' ? null : onInputHandler}
+      />
     </div>
   )
 }
