@@ -5,7 +5,8 @@
   width: 100%;
 }
 
-.educational {
+.educational,
+.professional {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -120,7 +121,8 @@ input.error {
   border-color: red;
 }
 
-.education {
+.education,
+.profession {
   display: grid;
   grid-template-columns: 1fr auto auto;
   border-radius: 5px;
