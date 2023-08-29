@@ -29,7 +29,6 @@ const handleFormCancelation = (event, callback) => {
 }
 
 const handleWrapperClick = (event, wrapper) => {
-  console.log(event.target.type);
   let content = wrapper.querySelector('.content');
   let button = wrapper.querySelector('.wrapper-toggle');
   let icon = button.querySelector('ion-icon');
