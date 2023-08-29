@@ -45,11 +45,6 @@
   border-bottom-right-radius: 5px;
 }
 
-.wrapper-toggle:focus-visible {
-  outline: none;
-  border: none;
-}
-
 ion-icon {
   transform: rotate(0deg);
   transition: transform .2s ease-in-out;
@@ -97,6 +92,7 @@ ion-icon.open {
 
 .configuration-form-buttons {
   display: flex;
+  flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
   width: 100%;

@@ -7,8 +7,8 @@ function ConfigurationForm({ inputs, onSubmitHandler, onCancelHandler }) {
         return <InputGroup key={index} id={input.id} label={input.label} type={input.type} placeHolder={input.placeHolder} onInputHandler={input.onInputHandler} />
       })}
       <div className="configuration-form-buttons">
-        <button onClick={onCancelHandler}>Cancel</button>
         <button type="submit">Confirm</button>
+        <button onClick={onCancelHandler}>Cancel</button>
       </div>
     </form>
   )
