@@ -28,7 +28,7 @@ const handleFormCancelation = (event, callback) => {
   callback('display');
 }
 
-const handleWrapperClick = (event, wrapper) => {
+const handleWrapperClick = (wrapper) => {
   let content = wrapper.querySelector('.content');
   let button = wrapper.querySelector('.wrapper-toggle');
   let icon = button.querySelector('ion-icon');
@@ -40,4 +40,14 @@ const handleWrapperClick = (event, wrapper) => {
   icon.classList.toggle('open', isOpen);
 }
 
-export { getNewID, checkValidity, handleNewForm, handleFormCancelation, handleWrapperClick };
+const handleDeletion = (id, array, callback) => {
+  let newArray = array;
+  let index = newArray.findIndex((element) => element.id === id);
+
+  if (index >= 0 && index < newArray.length)
+    newArray.splice(index, 1);
+
+  callback([...newArray]);
+}
+
+export { getNewID, checkValidity, handleNewForm, handleFormCancelation, handleWrapperClick, handleDeletion };

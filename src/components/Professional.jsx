@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { ConfigurationForm } from "./ConfigurationForm";
-import { getNewID, checkValidity, handleNewForm, handleFormCancelation, handleWrapperClick } from "../common";
+import {
+  getNewID, checkValidity, handleNewForm,
+  handleFormCancelation, handleWrapperClick,
+  handleDeletion
+} from "../common";
 
 function Professional({ professionalInfo, professionalInfoSetter }) {
 
   const [contentType, setContentType] = useState('display');
-  
+
   const formInputs = [
     { id: 'companyName', label: 'Company name', type: 'text', placeHolder: '', onInputHandler: '' },
     { id: 'positionTitle', label: 'Position', type: 'text', placeHolder: '', onInputHandler: '' },
@@ -44,7 +48,9 @@ function Professional({ professionalInfo, professionalInfoSetter }) {
               <div className="card profession" key={profession.id}>
                 <h3>{profession.companyName}<br />{profession.positionTitle}</h3>
                 <button data-profession-id={profession.id}><ion-icon name="create-outline"></ion-icon></button>
-                <button data-profession-id={profession.id}><ion-icon name="trash-outline"></ion-icon></button>
+                <button onClick={() => handleDeletion(profession.id, professionalInfo, professionalInfoSetter)}>
+                  <ion-icon name="trash-outline"></ion-icon>
+                </button>
               </div>
             )}
             <button className="card new-content" onClick={() => handleNewForm(setContentType)}><ion-icon name="add"></ion-icon></button>
@@ -59,7 +65,7 @@ function Professional({ professionalInfo, professionalInfoSetter }) {
 
   return (
     <div className="professional">
-      <button className="card wrapper-toggle" onClick={(e) => handleWrapperClick(e, document.querySelector('.professional'))}>
+      <button className="card wrapper-toggle" onClick={() => handleWrapperClick(document.querySelector('.professional'))}>
         <h2>Profession</h2>
         <ion-icon name="chevron-down"></ion-icon>
       </button>
