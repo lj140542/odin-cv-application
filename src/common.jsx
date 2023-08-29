@@ -29,13 +29,15 @@ const handleFormCancelation = (event, callback) => {
 }
 
 const handleWrapperClick = (event, wrapper) => {
+  console.log(event.target.type);
   let content = wrapper.querySelector('.content');
-  let icon = wrapper.querySelector('.wrapper-toggle ion-icon');
+  let button = wrapper.querySelector('.wrapper-toggle');
+  let icon = button.querySelector('ion-icon');
   let isOpen = false;
 
   content.classList.toggle('open');
   isOpen = content.classList.contains('open');
-  event.target.classList.toggle('open', isOpen);
+  button.classList.toggle('open', isOpen);
   icon.classList.toggle('open', isOpen);
 }
 
