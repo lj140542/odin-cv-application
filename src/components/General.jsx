@@ -14,9 +14,9 @@ function General({ generalInfo, generalInfoSetter }) {
   return (
     <div className='general card'>
       <h2>General Informations</h2>
-      <InputGroup id='fullname' label='Full name' placeHolder='First and last name' onInputHandler={(e) => handleFullNameChange(e.target.value)} />
-      <InputGroup id='email' label='Email' type='email' placeHolder='example@email.com' onInputHandler={(e) => handleEmailChange(e.target.value)} />
-      <InputGroup id='address' label='Address' placeHolder='City, Country' onInputHandler={(e) => handleAddressChange(e.target.value)} />
+      <InputGroup id='fullname' label='Full name' placeHolder='First and last name' onInputHandler={(e) => handleFullNameChange(e.target.value)} autocomplete='name' />
+      <InputGroup id='email' label='Email' type='email' placeHolder='example@email.com' onInputHandler={(e) => handleEmailChange(e.target.value)} autocomplete='email' />
+      <InputGroup id='address' label='Address' placeHolder='City, Country' onInputHandler={(e) => handleAddressChange(e.target.value)} autocomplete='off' />
     </div>
   )
 }
