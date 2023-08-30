@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { ConfigurationForm } from "./ConfigurationForm";
 
-function ConfigurationElement({ elementName, elementTitle, elementFormInputs, elementCreationFunction, elementMandatoryInfo, elementInfo, elementInfoSetter }) {
+function ConfigurationElement({ elementName, elementTitle, elementFormInputs, elementCreationFunction, elementGetDisplayValueFunction, elementMandatoryInfo, elementInfo, elementInfoSetter }) {
 
   const [contentType, setContentType] = useState('display');
+  const [editedElement, setEditedElement] = useState(null)
 
   const handleWrapperClick = () => {
     let wrapper = document.querySelector('#' + elementName);
@@ -58,25 +59,57 @@ function ConfigurationElement({ elementName, elementTitle, elementFormInputs, el
     })
 
     if (handleFormConformity(inputsToCheck)) {
-      let id = getNewID();
-      elementInfoSetter([...elementInfo, elementCreationFunction(id, elements)])
+      if (editedElement === null) // element creation 
+        elementInfoSetter([...elementInfo, elementCreationFunction(getNewID(), elements)]);
+
+      setEditedElement(null);
       setContentType('display');
     }
   }
 
   const handleFormCancelation = (event) => {
     event.preventDefault();
+
+    if (editedElement !== null) {
+      let newArray = [...elementInfo];
+      let index = newArray.findIndex((element) => element.id === editedElement.id);
+      if (index >= 0 && index < newArray.length) {
+        newArray[index] = editedElement;
+        elementInfoSetter(newArray);
+      }
+    }
+
+    setEditedElement(null);
     setContentType('display');
   }
 
+  const handleFormInput = (event) => {
+    let input = event.target;
+    let newArray = [...elementInfo];
+    let index = newArray.findIndex((element) => element.id === editedElement.id);
+
+    if (index >= 0 && index < newArray.length) {
+      let newElement = { ...newArray[index] };
+      newElement[input.id] = input.value;
+      newElement.displayValue = elementGetDisplayValueFunction(newElement);
+      newArray[index] = newElement;
+      elementInfoSetter(newArray);
+    }
+  }
+
+  const handleEdition = (element) => {
+    setEditedElement(element);
+    setContentType('form');
+  }
+
   const handleDeletion = (id) => {
-    let newArray = elementInfo;
+    let newArray = [...elementInfo];
     let index = newArray.findIndex((element) => element.id === id);
 
     if (index >= 0 && index < newArray.length)
       newArray.splice(index, 1);
 
-    elementInfoSetter([...newArray]);
+    elementInfoSetter(newArray);
   }
 
   const elementContent = (type) => {
@@ -87,7 +120,7 @@ function ConfigurationElement({ elementName, elementTitle, elementFormInputs, el
             {elementInfo.map(element =>
               <div className="content-element card" key={element.id}>
                 <h3>{element.displayValue}</h3>
-                <button><ion-icon name="create-outline"></ion-icon></button>
+                <button onClick={() => handleEdition(element)}><ion-icon name="create-outline"></ion-icon></button>
                 <button onClick={() => handleDeletion(element.id)}>
                   <ion-icon name="trash-outline"></ion-icon>
                 </button>
@@ -97,7 +130,14 @@ function ConfigurationElement({ elementName, elementTitle, elementFormInputs, el
           </>
         )
       case 'form':
-        return (<ConfigurationForm inputs={elementFormInputs} onSubmitHandler={handleFormValidation} onCancelHandler={handleFormCancelation} />)
+        return (
+          <ConfigurationForm
+            inputs={elementFormInputs}
+            onSubmitHandler={handleFormValidation}
+            onCancelHandler={handleFormCancelation}
+            onInputHandler={editedElement === null ? null : handleFormInput}
+            editedElement={editedElement}
+          />)
       default:
         return <></>;
     }

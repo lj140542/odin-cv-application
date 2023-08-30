@@ -15,9 +15,9 @@ function ConfigurationContainer({
         elementName='educational'
         elementTitle='Education'
         elementFormInputs={[
-          { id: 'schoolName', label: 'School name', type: 'text', placeHolder: '', onInputHandler: '' },
-          { id: 'studyTitle', label: 'Study title', type: 'text', placeHolder: '', onInputHandler: '' },
-          { id: 'studyDate', label: 'Study date', type: 'date', placeHolder: '', onInputHandler: '' }
+          { id: 'schoolName', label: 'School name', type: 'text', placeHolder: '' },
+          { id: 'studyTitle', label: 'Study title', type: 'text', placeHolder: '' },
+          { id: 'studyDate', label: 'Study date', type: 'date', placeHolder: '' }
         ]}
         elementCreationFunction={(id, formElements) => {
           return {
@@ -28,6 +28,7 @@ function ConfigurationContainer({
             displayValue: formElements.studyTitle.value
           }
         }}
+        elementGetDisplayValueFunction={element => element.studyTitle}
         elementMandatoryInfo={['schoolName', 'studyTitle']}
         elementInfo={educationalInfo}
         elementInfoSetter={educationalInfoSetter}
@@ -36,11 +37,11 @@ function ConfigurationContainer({
         elementName='professional'
         elementTitle='Profession'
         elementFormInputs={[
-          { id: 'companyName', label: 'Company name', type: 'text', placeHolder: '', onInputHandler: '' },
-          { id: 'positionTitle', label: 'Position', type: 'text', placeHolder: '', onInputHandler: '' },
-          { id: 'jobDescription', label: 'Description', type: 'text', placeHolder: '', onInputHandler: '' },
-          { id: 'startingDate', label: 'From', type: 'date', placeHolder: '', onInputHandler: '' },
-          { id: 'endingDate', label: 'To', type: 'date', placeHolder: '', onInputHandler: '' }
+          { id: 'companyName', label: 'Company name', type: 'text', placeHolder: '' },
+          { id: 'positionTitle', label: 'Position', type: 'text', placeHolder: '' },
+          { id: 'jobDescription', label: 'Description', type: 'text', placeHolder: '' },
+          { id: 'startingDate', label: 'From', type: 'date', placeHolder: '' },
+          { id: 'endingDate', label: 'To', type: 'date', placeHolder: '' }
         ]}
         elementCreationFunction={(id, formElements) => {
           return {
@@ -53,6 +54,7 @@ function ConfigurationContainer({
             displayValue: formElements.companyName.value + " - " + formElements.positionTitle.value
           }
         }}
+        elementGetDisplayValueFunction={element => element.companyName + " - " + element.positionTitle}
         elementMandatoryInfo={['companyName', 'positionTitle', 'startingDate']}
         elementInfo={professionalInfo}
         elementInfoSetter={professionalInfoSetter}
@@ -62,5 +64,3 @@ function ConfigurationContainer({
 }
 
 export { ConfigurationContainer }
-
-// elementName, elementTitle,  elementFormInputs, getNewElement
