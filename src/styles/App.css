@@ -6,7 +6,7 @@
 
 .app {
   display: grid;
-  grid-template-columns: 35% 55%;
+  grid-template-columns: 35% 45%;
   justify-content: space-around;
   gap: 20px;
   min-height: 100dvh;

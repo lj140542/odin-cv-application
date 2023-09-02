@@ -10,7 +10,7 @@
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  padding: 10px 25px;
+  padding: 25px 25px;
 }
 
 .contact-info-container {
@@ -24,6 +24,41 @@
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.resume-section {
+  padding: 25px 25px;
+}
+
+.resume-section-title-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+}
+
+.resume-section-title-line {
+  border: solid 1px #ffffff;
+}
+
+.resume-section-content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.resume-section-content {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.resume-section-content-title {
+  font-weight: 800;
+}
+
+.resume-section-content-description {
+  font-size: .8rem;
 }
 
 @media (prefers-color-scheme: light) {

@@ -14,7 +14,11 @@ function App() {
         educationalInfo={educationalInfo} educationalInfoSetter={setEducationalInfo}
         professionalInfo={professionalInfo} professionalInfoSetter={setProfessionalInfo}
       />
-      <Resume generalInfo={generalInfo} />
+      <Resume
+        generalInfo={generalInfo}
+        educationalInfo={educationalInfo}
+        professionalInfo={professionalInfo}
+      />
     </div>
   )
 }
